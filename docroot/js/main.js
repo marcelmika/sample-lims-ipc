@@ -115,7 +115,7 @@ AUI().use('aui-base', function (A) {
         });
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
-        // PRESENCE UPDATES
+        // PRESENCE UPDATED
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
         // Subscribe to the presence updated event
@@ -131,6 +131,21 @@ AUI().use('aui-base', function (A) {
             A.Array.each(event.users, function (user) {
                 presenceList.append('<span>' + user.userId + ':' + user.presence + '</span><br/>');
             });
+        });
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // UNREAD MESSAGE COUNT UPDATED
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
+        // Subscribe to the unread message count updated event
+        Liferay.on('lims:unreadMessagesCountUpdated', function (event) {
+
+            // Vars
+            var unreadMessageCount = event.count,
+                spanElement = A.one('.unread-messages');
+
+            // Update counter
+            spanElement.set('innerHTML', unreadMessageCount);
         });
 
     });

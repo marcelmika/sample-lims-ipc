@@ -2,6 +2,7 @@
 
 <portlet:defineObjects/>
 
+<%-- CREATE CONVERSATION --%>
 <div class="create-conversation">
     <strong>Create Conversation</strong>
 
@@ -16,6 +17,7 @@
     <p class="result alert"></p>
 </div>
 
+<%-- READ PRESENCE --%>
 <div class="read-presence">
     <strong>Read Presence</strong>
 
@@ -28,11 +30,24 @@
     <p class="result alert"></p>
 </div>
 
+<%-- PRESENCE UPDATED --%>
 <div class="presence-updated">
     <strong>Presence Updated Subscription</strong>
+
     <p>
-        Any user presence change will be listed in the list below:
+        Any user presence change will be listed in the section below:
     </p>
 
     <p class="presence-list result alert"></p>
+</div>
+
+<%-- UNREAD MESSAGES COUNT UPDATED --%>
+<div class="unread-message-count-updated">
+    <strong>Unread Messages Count Updated Subscription</strong>
+
+    <p>
+        Number of unread messages will be shown in the section below:
+    </p>
+
+    <p class="result alert">Unread Messages: <span class="unread-messages"></span></p>
 </div>
