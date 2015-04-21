@@ -27,3 +27,12 @@
 
     <p class="result alert"></p>
 </div>
+
+<div class="presence-updated">
+    <strong>Presence Updated Subscription</strong>
+    <p>
+        Any user presence change will be listed in the list below:
+    </p>
+
+    <p class="presence-list result alert"></p>
+</div>

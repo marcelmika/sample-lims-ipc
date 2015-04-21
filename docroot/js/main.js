@@ -27,6 +27,11 @@ AUI().use('aui-base', function (A) {
     // Wait until the lims portlet is ready
     Liferay.on('lims:ready', function () {
 
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // CREATE CONVERSATION
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
         // Attach click event on the create conversation button
         A.one('.create-conversation button').on('click', function () {
 
@@ -62,49 +67,71 @@ AUI().use('aui-base', function (A) {
                 }
             });
         });
-    });
 
-    // Attach click event on the read presence button
-    A.one('.read-presence button').on('click', function () {
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // READ PRESENCE
+        ///////////////////////////////////////////////////////////////////////////////////////////////
 
-        // Read user id's from the input. Normally, you would already have a list
-        // of users of whom you want to read the presence but for our purpose
-        // we take a list of users from the input and parse it.
-        var data = A.one('.read-presence input').get('value').split(',');
+        // Attach click event on the read presence button
+        A.one('.read-presence button').on('click', function () {
 
-        // Create IPC request
-        Liferay.fire('lims:readPresence', {
+            // Read user id's from the input. Normally, you would already have a list
+            // of users of whom you want to read the presence but for our purpose
+            // we take a list of users from the input and parse it.
+            var data = A.one('.read-presence input').get('value').split(',');
 
-            // Data is an array of users id's e.g [10434,10567]
-            data: data,
+            // Create IPC request
+            Liferay.fire('lims:readPresence', {
 
-            // Called on request success
-            success: function (response) {
+                // Data is an array of users id's e.g [10434,10567]
+                data: data,
 
-                // Clear the previous result if any
-                A.one('.read-presence .result').set('innerHTML', '');
+                // Called on request success
+                success: function (response) {
 
-                // Iterate over response and show user presences
-                A.Array.each(response, function (user) {
+                    // Clear the previous result if any
+                    A.one('.read-presence .result').set('innerHTML', '');
 
-                    // Prepare single row user id and related presence
-                    var row = user.userId + ' : ' + user.presence + '<br/>';
+                    // Iterate over response and show user presences
+                    A.Array.each(response, function (user) {
 
-                    A.one('.read-presence .result').append(row);
-                });
-            },
+                        // Prepare single row user id and related presence
+                        var row = user.userId + ' : ' + user.presence + '<br/>';
 
-            // Called on request failure
-            failure: function (code, reason) {
+                        A.one('.read-presence .result').append(row);
+                    });
+                },
 
-                // Prepare result message
-                var message = "Error! Code[" + code + "] Reason: " + reason;
+                // Called on request failure
+                failure: function (code, reason) {
 
-                // Show user the result
-                A.one('.read-presence .result').set('innerHTML', message);
-            }
+                    // Prepare result message
+                    var message = "Error! Code[" + code + "] Reason: " + reason;
+
+                    // Show user the result
+                    A.one('.read-presence .result').set('innerHTML', message);
+                }
+            });
         });
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // PRESENCE UPDATES
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
+        // Subscribe to the presence updated event
+        Liferay.on('lims:presenceUpdated', function (event) {
+
+            // Get the presence list div
+            var presenceList = A.one('.presence-list');
+
+            // Clear previous values
+            presenceList.set('innerHTML', '');
+
+            // Add users to the list
+            A.Array.each(event.users, function (user) {
+                presenceList.append('<span>' + user.userId + ':' + user.presence + '</span><br/>');
+            });
+        });
+
     });
-
-
 });
