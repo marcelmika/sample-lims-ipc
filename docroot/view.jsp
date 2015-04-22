@@ -91,6 +91,22 @@
     <p class="presence-list result alert"></p>
 </div>
 
+<%-- READ LAST CONVERSATIONSTIONS --%>
+<div class="read-last-conversations">
+    <strong>Read Last Conversations</strong>
+
+    <p>
+        Click on the button to read last conversations.
+    </p>
+
+    <div>
+        <button class="btn">Read last conversations</button>
+    </div>
+    <br/>
+
+    <pre class="result alert"></pre>
+</div>
+
 <%-- UNREAD MESSAGES COUNT UPDATED --%>
 <div class="unread-message-count-updated">
     <strong>Unread Messages Count Updated Subscription</strong>

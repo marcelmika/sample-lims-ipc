@@ -209,14 +209,63 @@ AUI().use('aui-base', function (A) {
         Liferay.on('lims:presenceUpdated', function (event) {
 
             // Get the presence list div
-            var presenceList = A.one('.presence-list');
+            var result = A.one('.presence-updated .result');
 
             // Clear previous values
-            presenceList.set('innerHTML', '');
+            result.set('innerHTML', '');
 
             // Add users to the list
             A.Array.each(event.users, function (user) {
-                presenceList.append('<span>' + user.userId + ':' + user.presence + '</span><br/>');
+                result.append('<span>' + user.userId + ':' + user.presence + '</span><br/>');
+            });
+        });
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // READ LAST CONVERSATIONS
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
+        // Attach click event on the read last conversations button
+        A.one('.read-last-conversations button').on('click', function () {
+
+            // Create IPC request
+            Liferay.fire('lims:readLastConversations', {
+
+                // Called on request success
+                success: function (response) {
+
+                    // Get the result element
+                    var result = A.one('.read-last-conversations .result');
+
+                    // Clear the result
+                    result.set('innerHTML', '');
+
+                    // Lets print some data from response to the result element
+                    A.Array.each(response, function(conversation) {
+
+                        // Vars
+                        var conversationNode = A.Node.create('<div>'),
+                            lastMessageNode = A.Node.create('<div>');
+
+                        conversationNode.set('innerHTML', conversation.conversationId + '<br/>' + conversation.title);
+                        lastMessageNode.set('innerHTML', conversation.lastMessage.body);
+
+                        // Append to result
+                        result.append(conversationNode);
+                        result.append(lastMessageNode);
+                        result.append('<br/>');
+                    });
+                },
+
+                // Called on request failure
+                failure: function (code, reason) {
+
+                    // Prepare result message
+                    var message = "Error! Code[" + code + "] Reason: " + reason;
+
+                    // Show user the result
+                    A.one('.read-last-conversations .result').set('innerHTML', message);
+                }
             });
         });
 
