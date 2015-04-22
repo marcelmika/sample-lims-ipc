@@ -40,6 +40,29 @@
     <p class="result alert"></p>
 </div>
 
+<%-- SEND MESSAGE --%>
+<div class="send-message">
+    <strong>Send Message</strong>
+
+    <p>
+        Fill the conversation id, message and click on the send button.
+    </p>
+
+    <div>
+        <input class="conversation-id" type="text" title="Conversation ID" placeholder="Conversation ID" value=""/>
+    </div>
+    <div>
+        <input class="message" type="text" title="Message" placeholder="Message" value=""/>
+    </div>
+
+    <div>
+        <button class="btn">Send</button>
+    </div>
+    <br/>
+
+    <p class="result alert"></p>
+</div>
+
 <%-- READ PRESENCE --%>
 <div class="read-presence">
     <strong>Read Presence</strong>

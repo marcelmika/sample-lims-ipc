@@ -112,6 +112,49 @@ AUI().use('aui-base', function (A) {
 
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
+        // SEND MESSAGE
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
+        // Attach click event on the send message button
+        A.one('.send-message button').on('click', function () {
+
+            // Get the conversation id and message
+            var conversationId = A.one('.send-message .conversation-id').get('value'),
+                message = A.one('.send-message .message').get('value');
+
+            // Create IPC request
+            Liferay.fire('lims:sendMessage', {
+
+                // Pass data to the event
+                data: {
+                    conversationId: conversationId,
+                    message: message
+                },
+
+                // Called on request success
+                success: function (event) {
+
+                    // Prepare result message
+                    var message = "OK! Conversation Id: " + event.conversationId;
+
+                    // Show user the result
+                    A.one('.send-message .result').set('innerHTML', message);
+                },
+
+                // Called on request failure
+                failure: function (code, reason) {
+
+                    // Prepare result message
+                    var message = "Error! Code[" + code + "] Reason: " + reason;
+
+                    // Show user the result
+                    A.one('.send-message .result').set('innerHTML', message);
+                }
+            });
+        });
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
         // READ PRESENCE
         ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -157,6 +200,7 @@ AUI().use('aui-base', function (A) {
             });
         });
 
+
         ///////////////////////////////////////////////////////////////////////////////////////////////
         // PRESENCE UPDATED
         ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -175,6 +219,7 @@ AUI().use('aui-base', function (A) {
                 presenceList.append('<span>' + user.userId + ':' + user.presence + '</span><br/>');
             });
         });
+
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
         // UNREAD MESSAGE COUNT UPDATED
