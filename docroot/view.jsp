@@ -11,8 +11,31 @@
         If you fill in a single user id, single user chat conversation will be created. If you fill in multiple
         user ids separated by comma a multi user chat will be created.
     </p>
-    <button class="btn">Create conversation</button>
-    <input type="text" title="user id's separated by comma" placeholder="e.g. 10434,10567" value="10567"/>
+
+    <div><input type="text" title="user id's separated by comma" placeholder="e.g. 10434,10567" value="10567"/></div>
+    <div>
+        <button class="btn">Create conversation</button>
+    </div>
+    <br/>
+
+    <p class="result alert"></p>
+</div>
+
+<%-- OPEN CONVERSATION --%>
+<div class="open-conversation">
+    <strong>Open Conversation</strong>
+
+    <p>
+        Create conversation and then fill the conversation id to open it.
+    </p>
+
+    <div>
+        <input class="conversation-id" type="text" title="Conversation ID" placeholder="Conversation ID" value=""/>
+    </div>
+    <div>
+        <button class="btn">Open conversation</button>
+    </div>
+    <br/>
 
     <p class="result alert"></p>
 </div>
@@ -24,8 +47,12 @@
     <p>
         Fill the user ids separated with comma and press the button to read their presence status.
     </p>
-    <button class="btn">Read presence</button>
-    <input type="text" title="user id's separated by comma" placeholder="e.g. 10434,10567" value="10567"/>
+
+    <div><input type="text" title="user id's separated by comma" placeholder="e.g. 10434,10567" value="10567"/></div>
+    <div>
+        <button class="btn">Read presence</button>
+    </div>
+    <br/>
 
     <p class="result alert"></p>
 </div>

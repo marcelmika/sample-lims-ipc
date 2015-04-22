@@ -50,7 +50,8 @@ AUI().use('aui-base', function (A) {
                 success: function (response) {
 
                     // Prepare result message
-                    var message = "OK! Conversation id: " + response.conversationId;
+                    var message = "OK!" +
+                        "<br/>Conversation id: " + response.conversationId;
 
                     // Show user the result
                     A.one('.create-conversation .result').set('innerHTML', message);
@@ -67,6 +68,48 @@ AUI().use('aui-base', function (A) {
                 }
             });
         });
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // OPEN CONVERSATION
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+
+        // Attach click event on the open conversation button
+        A.one('.open-conversation button').on('click', function () {
+
+            // Get the conversation id
+            var conversationId = A.one('.open-conversation .conversation-id').get('value');
+
+            // Create IPC request
+            Liferay.fire('lims:openConversation', {
+
+                // Pass data to the event
+                data: {
+                    conversationId: conversationId
+                },
+
+                // Called on request success
+                success: function () {
+
+                    // Prepare result message
+                    var message = "OK!";
+
+                    // Show user the result
+                    A.one('.open-conversation .result').set('innerHTML', message);
+                },
+
+                // Called on request failure
+                failure: function (code, reason) {
+
+                    // Prepare result message
+                    var message = "Error! Code[" + code + "] Reason: " + reason;
+
+                    // Show user the result
+                    A.one('.open-conversation .result').set('innerHTML', message);
+                }
+            });
+        });
+
 
         ///////////////////////////////////////////////////////////////////////////////////////////////
         // READ PRESENCE
