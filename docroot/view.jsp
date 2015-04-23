@@ -12,7 +12,7 @@
         user ids separated by comma a multi user chat will be created.
     </p>
 
-    <div><input type="text" title="user id's separated by comma" placeholder="e.g. 10434,10567" value="10567"/></div>
+    <div><input type="text" title="user id's separated by comma" placeholder="e.g. 10434,10567" value=""/></div>
     <div>
         <button class="btn">Create conversation</button>
     </div>
@@ -71,7 +71,7 @@
         Fill the user ids separated with comma and press the button to read their presence status.
     </p>
 
-    <div><input type="text" title="user id's separated by comma" placeholder="e.g. 10434,10567" value="10567"/></div>
+    <div><input type="text" title="user id's separated by comma" placeholder="e.g. 10434,10567" value=""/></div>
     <div>
         <button class="btn">Read presence</button>
     </div>
